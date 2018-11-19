@@ -31,6 +31,10 @@
 			<!-- General Settings -->
 			<meta name="if:Notes" content="0"/>
 			<meta name="if:Show Full Photoset" content="0">
+			<meta name="if:Music Player" content="1"/>
+
+			<!-- Image Settings -->
+			<meta name="image:Header" content="{HeaderImage}"/>
 
 			<!-- Font Size Style -->
 			<meta name="select:Font size" content="1.4em" title="Normal">
@@ -65,14 +69,21 @@
 				color:{color:Post Link};
 			}
 
+			.text-body img {
+				width: 100%;
+				height: auto;
+			}
+
 			{CustomCSS}
 		</style>
 
 		<!-- Script loader at the end for optimization -->
 		<script src="https://static.aurorafoss.org/aurorafoss/pub/web/materializecss/1.0.0/js/materialize.min.js"></script>
 
-		<!-- Music Player -->
-		<script type="text/javascript" src="https://rwplayer.aurorafoss.org/player.js" data-config="{'skin':'skins/tunes/skin.css','volume':50,'autoplay':true,'shuffle':true,'repeat':1,'placement':'top','showplaylist':false,'playlist':[]}" ></script>
+		{block:IfMusicPlayer}
+			<!-- Music Player -->
+			<script type="text/javascript" src="https://rwplayer.aurorafoss.org/player.js" data-config="{'skin':'skins/tunes/skin.css','volume':50,'autoplay':true,'shuffle':true,'repeat':1,'placement':'top','showplaylist':false,'playlist':[]}" ></script>
+		{/block:IfMusicPlayer}
 	</head>
 	<body>
 		<header class="container">
@@ -81,7 +92,8 @@
 				{block:ShowAvatar}
 					<img src="{PortraitURL-128}" style="max-height: 200px; width: auto;"/>
 				{/block:ShowAvatar}
-				<h4 class="header col s12 light text-lighten-1" style="font-size: 2.0em">{Title}</h4>
+				{block:IfHeaderImage}<img class="responsive-img center-align" src="{image:Header}"/>{/block:IfHeaderImage} 
+				{block:IfNotHeaderImage}<h4 class="header col s12 light text-lighten-1" style="font-size: 2.0em">{Title}</h4>{/block:IfNotHeaderImage}
 				{block:Description}
 					<p id="description">{Description}</p>
 				{/block:Description}
@@ -164,7 +176,9 @@
 				{/block:Posts}
 
 				{block:IndexPage}</section>{/block:IndexPage}
-
+			</div>
+			<br />
+			<div class="row center">
 				{block:Pagination}
 					<ul class="pagination">
 						{block:PreviousPage}
@@ -178,9 +192,12 @@
 						{/block:NextPage}
 					</ul>
 				{/block:Pagination}
-
 			</div>
 		</section>
+
+		<div class="container center">
+			<span class="center">Made with <span class="red-text">❤</span></span>
+		</div>
 
 		{block:IndexPage}
 		<footer class="primary-footer fade">
