@@ -31,7 +31,52 @@
 			<!-- General Settings -->
 			<meta name="if:Notes" content="0"/>
 			<meta name="if:Show Full Photoset" content="0">
-			<meta name="if:Music Player" content="1"/>
+			
+			<!-- Music Player Settings -->
+			<meta name="if:Music Player" content="0"/>
+
+			<meta name="select:Music Player Position" content="top" title="Top">
+			<meta name="select:Music Player Position" content="bottom" title="Bottom">
+
+			<meta name="select:Music Player Repeat Mode" content="0" title="Play Once">
+			<meta name="select:Music Player Repeat Mode" content="1" title="Playlist Repeat">
+			<meta name="select:Music Player Repeat Mode" content="2" title="Music Repeat">
+
+			<meta name="if:Music Player Auto Play" content="1"/>
+			<meta name="if:Music Player Shuffle Playback" content="1"/>
+			<meta name="if:Music Player Default Show Playlist" content="0"/>
+			<meta name="text:Music Player Default Volume" content="50"/>
+
+			<meta name="select:Music Player Skin" content="skins/tunes/skin.css" title="Tunes">
+			<meta name="select:Music Player Skin" content="skins/aquaBlue/skin.css" title="Aqua Blue">
+			<meta name="select:Music Player Skin" content="skins/aquaGreen/skin.css" title="Aqua Green">
+			<meta name="select:Music Player Skin" content="skins/aquaOrange/skin.css" title="Aqua Orange">
+			<meta name="select:Music Player Skin" content="skins/aquaPink/skin.css" title="Aqua Pink">
+			<meta name="select:Music Player Skin" content="skins/aquaPurple/skin.css" title="Aqua Purple">
+			<meta name="select:Music Player Skin" content="skins/aquaPurpleReal/skin.css" title="Aqua Purple Real">
+			<meta name="select:Music Player Skin" content="skins/simpleBlue/skin.css" title="Simple Blue">
+			<meta name="select:Music Player Skin" content="skins/blue/skin.css" title="Blue">
+			<meta name="select:Music Player Skin" content="skins/fancyBlue/skin.css" title="Fancy Blue">
+			<meta name="select:Music Player Skin" content="skins/simpleGreen/skin.css" title="Simple Green">
+			<meta name="select:Music Player Skin" content="skins/green/skin.css" title="Green">
+			<meta name="select:Music Player Skin" content="skins/fancyGreen/skin.css" title="Fancy Green">
+			<meta name="select:Music Player Skin" content="skins/simpleOrange/skin.css" title="Simple Orange">
+			<meta name="select:Music Player Skin" content="skins/orange/skin.css" title="Orange">
+			<meta name="select:Music Player Skin" content="skins/fancyOrange/skin.css" title="Fancy Orange">
+			<meta name="select:Music Player Skin" content="skins/simplePurple/skin.css" title="Simple Purple">
+			<meta name="select:Music Player Skin" content="skins/purple/skin.css" title="Purple">
+			<meta name="select:Music Player Skin" content="skins/fancyPurple/skin.css" title="Fancy Purple">
+			<meta name="select:Music Player Skin" content="skins/simpleRed/skin.css" title="Simple Red">
+			<meta name="select:Music Player Skin" content="skins/fancyRed/skin.css" title="Fancy Red">
+			<meta name="select:Music Player Skin" content="skins/pink/skin.css" title="Pink">
+			<meta name="select:Music Player Skin" content="skins/cyber/skin.css" title="Cyber">
+			<meta name="select:Music Player Skin" content="skins/simpleBlack/skin.css" title="Simple Black">
+			<meta name="select:Music Player Skin" content="skins/black/skin.css" title="Black">
+
+			<meta name="text:Music Player Playlist" content=""/>
+
+			<meta name="if:Music Player Custom Skin" content="0"/>
+			<meta name="text:Music Player Custom Skin Path" content="skins/tunes/skin.css"/>
 
 			<!-- Image Settings -->
 			<meta name="image:Header" content="{HeaderImage}"/>
@@ -82,7 +127,26 @@
 
 		{block:IfMusicPlayer}
 			<!-- Music Player -->
-			<script type="text/javascript" src="https://rwplayer.aurorafoss.org/player.js" data-config="{'skin':'skins/tunes/skin.css','volume':50,'autoplay':true,'shuffle':true,'repeat':1,'placement':'top','showplaylist':false,'playlist':[]}" ></script>
+			<script type="text/javascript" src="https://rwplayer.aurorafoss.org/player.js"
+				data-config="{
+					'skin':
+						'{block:IfMusicPlayerCustomSkin}{block:IfMusicPlayerCustomSkinPath}{text:Music Player Custom Skin Path}{/block:IfMusicPlayerCustomSkinPath}{block:IfNotMusicPlayerCustomSkinPath}skins/tunes/skin.css{/block:IfNotMusicPlayerCustomSkinPath}{/block:IfMusicPlayerCustomSkin}{block:IfNotMusicPlayerCustomSkin}{select:Music Player Skin}{/block:IfNotMusicPlayerCustomSkin}',
+					'volume':
+						{block:IfMusicPlayerDefaultVolume}{text:Music Player Default Volume}{/block:IfMusicPlayerDefaultVolume}
+						{block:IfNotMusicPlayerDefaultVolume}50{/block:IfNotMusicPlayerDefaultVolume},
+					'autoplay':
+						{block:IfMusicPlayerAutoPlay}true{/block:IfMusicPlayerAutoPlay}
+						{block:IfNotMusicPlayerAutoPlay}false{/block:IfNotMusicPlayerAutoPlay},
+					'shuffle':
+						{block:IfMusicPlayerShufflePlayback}true{/block:IfMusicPlayerShufflePlayback}
+						{block:IfNotMusicPlayerShufflePlayback}false{/block:IfNotMusicPlayerShufflePlayback},
+					'repeat':{select:Music Player Repeat Mode},
+					'placement':'{select:Music Player Position}',
+					'showplaylist':
+						{block:IfMusicPlayerDefaultShowPlaylist}true{/block:IfMusicPlayerDefaultShowPlaylist}
+						{block:IfNotMusicPlayerDefaultShowPlaylist}false{/block:IfNotMusicPlayerDefaultShowPlaylist},
+					'playlist':[{text:Music Player Playlist}]
+				}" ></script>
 		{/block:IfMusicPlayer}
 	</head>
 	<body>
