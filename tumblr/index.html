@@ -66,6 +66,7 @@
 			<!-- General Settings -->
 			<meta name="if:Notes" content="0"/>
 			<meta name="if:Show Full Photoset" content="0">
+			<meta name="if:Show Description" content="1">
 			
 			<!-- Music Player Settings -->
 			<meta name="if:Music Player" content="0"/>
@@ -115,6 +116,7 @@
 
 			<!-- Image Settings -->
 			<meta name="image:Header" content="{HeaderImage}"/>
+			<meta name="if:Show Header" content="0">
 
 			<!-- Font Size Style -->
 			<meta name="select:Font size" content="1.4em" title="Normal">
@@ -191,11 +193,22 @@
 				{block:ShowAvatar}
 					<a href="{BlogURL}"><img src="{PortraitURL-128}" style="max-height: 200px; width: auto;"/></a>
 				{/block:ShowAvatar}
-				{block:IfHeaderImage}<img class="responsive-img center-align" src="{image:Header}"/>{/block:IfHeaderImage} 
-				{block:IfNotHeaderImage}<h4 class="header col s12 light text-lighten-1" style="font-size: 2.0em">{Title}</h4>{/block:IfNotHeaderImage}
-				{block:Description}
-					<p id="description">{Description}</p>
-				{/block:Description}
+				
+				{block:IfHeaderImage}
+					{block:IfShowHeader}
+						<img class="responsive-img center-align" src="{image:Header}"/>
+					{/block:IfShowHeader}
+				{/block:IfHeaderImage}
+				{block:IfNotHeaderImage}
+					{block:IfNotShowHeader}
+						<h4 class="header col s12 light text-lighten-1" style="font-size: 2.0em">{Title}</h4>
+					{/block:IfNotShowHeader}
+				{/block:IfNotHeaderImage}
+				{block:IfShowDescription}
+					{block:Description}
+						<p id="description">{Description}</p>
+					{/block:Description}
+				{/block:IfShowDescription}
 				{block:HasPages}
 					{block:Pages}
 						<span class="page"><a href="{URL}">{Label}</a></span>
