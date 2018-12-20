@@ -290,6 +290,13 @@
 
 				{block:IndexPage}</section>{/block:IndexPage}
 			</div>
+
+			{block:IndexPage}
+				<div class="center primary-footer fade">
+					<a href="#" class="load-more"><span class="load-more-entries">+</span></a>
+				</div>
+			{/block:IndexPage}
+
 			<br />
 			<div class="row center">
 				{block:Pagination}
@@ -297,7 +304,7 @@
 						{block:PreviousPage}
 							<li class="waves-effect"><a href="{PreviousPage}"><i class="material-icons">chevron_left</i></a></li>
 						{/block:PreviousPage}
-						
+
 						<li class="active"><a href="#!">{CurrentPage}</a></li>
 
 						{block:NextPage}
@@ -308,16 +315,10 @@
 			</div>
 		</section>
 
-		<div class="container center">
+		<footer class="container center">
 			<span class="center">Made with <span class="red-text">❤</span></span>
-		</div>
-
-		{block:IndexPage}
-		<footer class="primary-footer fade">
-			<a href="#" class="load-more"><span class="load-more-entries">+</span></a>
 		</footer>
-		{/block:IndexPage}
-		
+
 		<!-- Google Analytics script -->
 		{block:IfGoogleAnalyticsID}
 		<script>
